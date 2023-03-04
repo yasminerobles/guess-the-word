@@ -52,16 +52,16 @@ const makeGuess = function(guess) {
     } else {
         guessedLetters.push(guess);
         console.log(guessedLetters);
-        showguessedLetters();
+        showGuessedLetters();
     }
 };
 
 const showGuessedLetters = function () {
-    guessedLettersElement.innerHTML = "";
+    guessedLetterElement.innerHTML = "";
     for (const letter of guessedLetters) {
       const li = document.createElement("li");
       li.innerText = letter;
-      guessedLettersElement.append(li);
+      guessedLetterElement.append(li);
     }
   };
 
