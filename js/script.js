@@ -7,8 +7,6 @@ const remainingGuessesSpan = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
 const againButton = document.querySelector(".play-again");
 
-
-
 const word = "Magnolia";
 const guessedLetters = [];
 
@@ -23,18 +21,21 @@ const filler = function (word) {
 
 filler(word);
 
-
 guessButton.addEventListener("click", function(e){
     e.preventDefault();
     message.innerText = "";
     const guess = input.value;
     const rightGuess = validation (guess);
-
+    if (rightGuess){
+        makeGuess(guess);
+    
+    }
+    input.value = "";
 });
 
 const validation = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
-    if (input===0){
+    if (input.length===0){
         message.innerText = "Please enter a letter.";
     } else if (input.length>1) {
         message.innerText = "Please enter one letter.";
@@ -45,14 +46,15 @@ const validation = function (input) {
     }
 };
 
-const makeGuess = function(guess) {
+const makeGuess = function (guess) {
     guess = guess.toUpperCase();
     if (guessedLetters.includes(guess)) {
-        message.innerText = "You already guessed that letter.";
+        message.innerText = "You already guessed that letter. Take another guess.";
     } else {
         guessedLetters.push(guess);
         console.log(guessedLetters);
         showGuessedLetters();
+        updateWordInProgress(guessedLetters);
     }
 };
 
